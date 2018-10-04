@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("basicHome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         primaryStage.setTitle("Fitness applicatie");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMaximized(true);
