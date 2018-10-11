@@ -11,9 +11,12 @@
    <left>
       <Accordion BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane fx:id="buik" animated="false" onMouseClicked="#showText" prefHeight="74.0" prefWidth="202.0" text="Buik">
+          <TitledPane fx:id="buik" animated="false" onMouseClicked="#showExcercises" prefHeight="74.0" prefWidth="202.0" text="Buik">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="buikExcercises" prefHeight="167.0" prefWidth="201.0" />
+                     </children></AnchorPane>
             </content>
           </TitledPane>
           <TitledPane animated="false" text="Schouders">
@@ -34,7 +37,7 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <TextArea fx:id="discription" editable="false" text="Hier komt de informatie over oefeningen." />
-            <Button id="vulOefeningen" fx:id="showText" mnemonicParsing="false" onAction="#showText" text="Login" />
+            <Button id="vulOefeningen" fx:id="showText" mnemonicParsing="false" onAction="#showExcercises" text="Login" />
          </children>
       </VBox>
    </center>
