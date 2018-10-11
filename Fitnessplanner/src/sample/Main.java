@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
+
 public class Main extends Application {
 
     @Override
@@ -16,6 +18,13 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
 
+        // test myjdbc
+        MyJDBC db = new MyJDBC();
+        ResultSet resultSet = db.executeResultSetQuery("SELECT * FROM category");
+
+        while ( resultSet.next() ){
+            System.out.println(resultSet.getString("name"));
+        }
 
     }
 
