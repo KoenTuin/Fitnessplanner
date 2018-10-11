@@ -21,45 +21,10 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="46.0" prefWidth="200.0" />
             </content>
           </TitledPane>
-          <TitledPane animated="false" prefHeight="92.0" prefWidth="202.0" text="Armen">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Accordion>
-                          <panes>
-                            <TitledPane animated="false" prefHeight="38.0" prefWidth="202.0" text="Bicep">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <ListView prefHeight="200.0" prefWidth="200.0" />
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </TitledPane>
-                            <TitledPane animated="false" prefHeight="0.0" prefWidth="202.0" text="Tricep">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <ListView layoutY="7.0" prefHeight="63.0" prefWidth="200.0" />
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </TitledPane>
-                          </panes>
-                        </Accordion>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
+          <TitledPane animated="false" prefHeight="92.0" prefWidth="202.0" text="Armen" />
             <TitledPane animated="false" text="Benen">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="200.0">
-                     <children>
-                        <Label id="benenOef1" fx:id="textLabel" prefHeight="17.0" prefWidth="201.0" />
-                        <Label id="benenOef3" layoutY="34.0" prefHeight="17.0" prefWidth="200.0" />
-                        <Label id="benenOef2" layoutY="17.0" prefHeight="17.0" prefWidth="202.0" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="200.0" />
                </content>
             </TitledPane>
         </panes>
