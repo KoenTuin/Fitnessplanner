@@ -1,4 +1,4 @@
-package sample;
+package fitnessplanner.models;
 
 import java.sql.*;
 import java.util.Enumeration;
@@ -233,8 +233,8 @@ public class MyJDBC {
     }
 
     /***
-     * builds a sample database with sample content
-     * @param dbName    name of the sample database.
+     * builds a fitnessplanner database with fitnessplanner content
+     * @param dbName    name of the fitnessplanner database.
      */
     public static void createTestDatabase(String dbName) {
 

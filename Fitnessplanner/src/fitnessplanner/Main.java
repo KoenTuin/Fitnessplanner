@@ -1,5 +1,6 @@
-package sample;
+package fitnessplanner;
 
+import fitnessplanner.models.MyJDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/Menu.fxml"));
         primaryStage.setTitle("Fitness applicatie");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
