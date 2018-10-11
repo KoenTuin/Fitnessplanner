@@ -15,7 +15,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         primaryStage.setTitle("Fitness applicatie");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
         primaryStage.show();
 
         // test myjdbc
