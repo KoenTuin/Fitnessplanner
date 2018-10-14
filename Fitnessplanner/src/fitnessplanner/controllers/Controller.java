@@ -21,6 +21,9 @@ public class Controller implements Initializable {
     public TextArea discription;
     public TitledPane buik;
     public VBox buikExcercises;
+    public VBox shoulderExcercises;
+    public VBox armenExcercises;
+    public VBox benenExcercises;
 
     public void button(ActionEvent actionEvent) {
         inhoud = "Test oefening 1";
@@ -58,14 +61,13 @@ public class Controller implements Initializable {
         MyJDBC db = new MyJDBC();
         ResultSet resultSet = null;
         try {
+
             resultSet = db.executeResultSetQuery("SELECT name FROM workout");
 
             while (resultSet.next()) {
                 String naam = resultSet.getString("name");
                 Label label = new Label(naam);
 //                label.setId(naam);
-//                Fix dat de labels clickable worden en dat de discription van de des betreffende oefening wordt
-//                weergegeven.
                 label.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
@@ -78,6 +80,7 @@ public class Controller implements Initializable {
                     }
                 });
                 buikExcercises.getChildren().add(label);
+
 
             }
         } catch (SQLException e) {
