@@ -2,9 +2,11 @@ package fitnessplanner.controllers;
 
 import fitnessplanner.models.MyJDBC;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -28,6 +30,12 @@ public class Controller implements Initializable {
 
     @FXML
     public void showExcercises() throws SQLException {
+//        //select info from local database from right table
+//        MyJDBC db = new MyJDBC();
+//        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
+//
+//
+
         System.out.println("It works");
         //Get from database data which is from catagory buik.gettext
 
@@ -35,10 +43,10 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void showDescription() throws SQLException {
+    public void showDescription(String naam) throws SQLException {
         MyJDBC db = new MyJDBC();
-        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
-
+        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout WHERE name = '"+ naam + "'");
+        discription.setText("");
         while (resultSet.next()) {
             discription.appendText(resultSet.getString("description") + "\n");
         }
@@ -58,7 +66,17 @@ public class Controller implements Initializable {
 //                label.setId(naam);
 //                Fix dat de labels clickable worden en dat de discription van de des betreffende oefening wordt
 //                weergegeven.
-//                label.setOnMouseClicked();
+                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        try{
+                            showDescription(naam);
+                        }catch(SQLException e){
+                            System.out.println("A SQL excepption has occured\n" + e);
+                        }
+
+                    }
+                });
                 buikExcercises.getChildren().add(label);
 
             }
