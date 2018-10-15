@@ -6,9 +6,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,14 +23,19 @@ public class Controller implements Initializable {
     public Button showText;
     public TextArea discription;
     public TitledPane buik;
+    public TitledPane schouders;
+    public TitledPane benen;
+    public TitledPane armen;
     public VBox buikExcercises;
     public VBox shoulderExcercises;
     public VBox armenExcercises;
     public VBox benenExcercises;
+    public ImageView workoutImage;
 
     public void button(ActionEvent actionEvent) {
         inhoud = "Test oefening 1";
         textLabel.setText(inhoud);
+
 
     }
 
@@ -57,108 +65,127 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //File file = new File("src/Test.png");resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Buik'");
+        File file = new File("src/images/crunch.jpg");
+        Image image = new Image(file.toURI().toString());
+        workoutImage.setImage(image);
         discription.setText("");
         MyJDBC db = new MyJDBC();
         ResultSet resultSet = null;
-        try {
+        String[] dbCategorie = {buik.getText(),schouders.getText(),armen.getText(),benen.getText()};
+        for (int i = 0; i < dbCategorie.length; i++) {
 
-            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Buik'");
 
-            while (resultSet.next()) {
-                String naam = resultSet.getString("name");
-                Label label = new Label(naam);
+            try {
+
+                resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = '" + dbCategorie[i] + "'");
+
+                while (resultSet.next()) {
+                    String naam = resultSet.getString("name");
+                    Label label = new Label(naam);
+                    System.out.println("Naam: " + naam);
 //                label.setId(naam);
-                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        try{
-                            showDescription(naam);
-                        }catch(SQLException e){
-                            System.out.println("A SQL excepption has occured\n" + e);
+                    label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            try {
+                                showDescription(naam);
+
+                            } catch (SQLException e) {
+                                System.out.println("A SQL excepption has occured\n" + e);
+                            }
+
                         }
-
+                    });
+                    if (dbCategorie[i] == buik.getText()) {
+                        buikExcercises.getChildren().add(label);
+                    }else if(dbCategorie[i] == schouders.getText()){
+                        shoulderExcercises.getChildren().add(label);
+                    }else if(dbCategorie[i] == armen.getText()){
+                        armenExcercises.getChildren().add(label);
+                    }else if(dbCategorie[i] == benen.getText()){
+                        benenExcercises.getChildren().add(label);
                     }
-                });
-                buikExcercises.getChildren().add(label);
-
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        try {
-
-            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Shoulders'");
-
-            while (resultSet.next()) {
-                String naam = resultSet.getString("name");
-                Label label = new Label(naam);
-//                label.setId(naam);
-                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        try{
-                            showDescription(naam);
-                        }catch(SQLException e){
-                            System.out.println("A SQL excepption has occured\n" + e);
-                        }
-
-                    }
-                });
-                shoulderExcercises.getChildren().add(label);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-
-            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Armen'");
-
-            while (resultSet.next()) {
-                String naam = resultSet.getString("name");
-                Label label = new Label(naam);
-//                label.setId(naam);
-                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        try{
-                            showDescription(naam);
-                        }catch(SQLException e){
-                            System.out.println("A SQL excepption has occured\n" + e);
-                        }
-
-                    }
-                });
-                armenExcercises.getChildren().add(label);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-
-            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Benen'");
-
-            while (resultSet.next()) {
-                String naam = resultSet.getString("name");
-                Label label = new Label(naam);
-//                label.setId(naam);
-                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        try{
-                            showDescription(naam);
-                        }catch(SQLException e){
-                            System.out.println("A SQL excepption has occured\n" + e);
-                        }
-
-                    }
-                });
-                benenExcercises.getChildren().add(label);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //Koen oude code
+//        try {
+//
+//            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Shoulders'");
+//
+//            while (resultSet.next()) {
+//                String naam = resultSet.getString("name");
+//                Label label = new Label(naam);
+////                label.setId(naam);
+//                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent event) {
+//                        try{
+//                            showDescription(naam);
+//                        }catch(SQLException e){
+//                            System.out.println("A SQL excepption has occured\n" + e);
+//                        }
+//
+//                    }
+//                });
+//                shoulderExcercises.getChildren().add(label);
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//
+//            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Armen'");
+//
+//            while (resultSet.next()) {
+//                String naam = resultSet.getString("name");
+//                Label label = new Label(naam);
+////                label.setId(naam);
+//                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent event) {
+//                        try{
+//                            showDescription(naam);
+//                        }catch(SQLException e){
+//                            System.out.println("A SQL excepption has occured\n" + e);
+//                        }
+//
+//                    }
+//                });
+//                armenExcercises.getChildren().add(label);
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//
+//            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Benen'");
+//
+//            while (resultSet.next()) {
+//                String naam = resultSet.getString("name");
+//                Label label = new Label(naam);
+////                label.setId(naam);
+//                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent event) {
+//                        try{
+//                            showDescription(naam);
+//                        }catch(SQLException e){
+//                            System.out.println("A SQL excepption has occured\n" + e);
+//                        }
+//
+//                    }
+//                });
+//                benenExcercises.getChildren().add(label);
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 }

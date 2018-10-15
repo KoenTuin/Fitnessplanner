@@ -19,7 +19,7 @@
                      </children></AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane animated="false" text="Schouders">
+          <TitledPane fx:id="schouders" animated="false" text="Schouders">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="46.0" prefWidth="200.0">
                      <children>
@@ -27,7 +27,7 @@
                      </children></AnchorPane>
             </content>
           </TitledPane>
-            <TitledPane animated="false" text="Benen">
+            <TitledPane fx:id="benen" animated="false" text="Benen">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="200.0">
                      <children>
@@ -35,7 +35,7 @@
                      </children></AnchorPane>
                </content>
             </TitledPane>
-          <TitledPane animated="false" prefHeight="92.0" prefWidth="202.0" text="Armen">
+          <TitledPane fx:id="armen" animated="false" prefHeight="92.0" prefWidth="202.0" text="Armen">
                <content>
                   <AnchorPane prefHeight="74.0" prefWidth="221.0">
                      <children>
@@ -49,7 +49,12 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="discription" editable="false" text="Hier komt de informatie over oefeningen." />
+            <HBox prefHeight="150.0" prefWidth="646.0">
+               <children>
+                  <TextArea fx:id="discription" editable="false" text="Hier komt de informatie over oefeningen." />
+                  <ImageView fx:id="workoutImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
             <Button id="vulOefeningen" fx:id="showText" mnemonicParsing="false" onAction="#showExcercises" onMouseClicked="#showExcercises" text="Login" />
          </children>
       </VBox>
