@@ -21,6 +21,7 @@ public class Controller implements Initializable {
     public Label textLabel;
     public String inhoud;
     public Button showText;
+    public Button voegToe;
     public TextArea discription;
     public TitledPane buik;
     public TitledPane schouders;
@@ -35,8 +36,6 @@ public class Controller implements Initializable {
     public void button(ActionEvent actionEvent) {
         inhoud = "Test oefening 1";
         textLabel.setText(inhoud);
-
-
     }
 
     @FXML
@@ -44,9 +43,6 @@ public class Controller implements Initializable {
 //        //select info from local database from right table
 //        MyJDBC db = new MyJDBC();
 //        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
-//
-//
-
         System.out.println("It works");
         //Get from database data which is from catagory buik.gettext
 
@@ -66,30 +62,40 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //File file = new File("src/Test.png");resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Buik'");
-        File file = new File("src/images/crunch.jpg");
-        Image image = new Image(file.toURI().toString());
-        workoutImage.setImage(image);
+//        File file = new File("src/images/crunch.jpg");
+//        Image image = new Image(file.toURI().toString());
+//        workoutImage.setImage(image);
         discription.setText("");
         MyJDBC db = new MyJDBC();
         ResultSet resultSet = null;
         String[] dbCategorie = {buik.getText(),schouders.getText(),armen.getText(),benen.getText()};
         for (int i = 0; i < dbCategorie.length; i++) {
 
-
             try {
 
-                resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = '" + dbCategorie[i] + "'");
+                resultSet = db.executeResultSetQuery("SELECT name,image FROM workout WHERE category = '" + dbCategorie[i] + "'");
 
                 while (resultSet.next()) {
                     String naam = resultSet.getString("name");
                     Label label = new Label(naam);
+                    String images = resultSet.getString("image");
+
                     System.out.println("Naam: " + naam);
 //                label.setId(naam);
                     label.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             try {
+                                //shows the description
                                 showDescription(naam);
+                                //shows the image
+                                if (images != null) {
+                                    File file = new File("src/images/" + images);
+                                    Image image = new Image(file.toURI().toString());
+                                    workoutImage.setImage(image);
+                                }else {
+                                    workoutImage.setImage(null);
+                                }
 
                             } catch (SQLException e) {
                                 System.out.println("A SQL excepption has occured\n" + e);
@@ -97,6 +103,7 @@ public class Controller implements Initializable {
 
                         }
                     });
+                    //adds label to the right parent
                     if (dbCategorie[i] == buik.getText()) {
                         buikExcercises.getChildren().add(label);
                     }else if(dbCategorie[i] == schouders.getText()){
