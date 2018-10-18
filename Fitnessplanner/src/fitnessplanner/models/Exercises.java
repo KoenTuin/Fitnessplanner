@@ -12,12 +12,5 @@ public class Exercises {
         this.description = description;
     }
 
-    public String getExercisesName() {
-
-        return exercisesName;
-    }
-
-    public void setExercisesName(String exercisesName) {
-        this.exercisesName = exercisesName;
-    }
+    
 }

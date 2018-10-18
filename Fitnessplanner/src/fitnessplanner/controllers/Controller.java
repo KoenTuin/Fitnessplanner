@@ -32,6 +32,7 @@ public class Controller implements Initializable {
     public VBox armenExcercises;
     public VBox benenExcercises;
     public ImageView workoutImage;
+    MyJDBC db = new MyJDBC();
 
     public void button(ActionEvent actionEvent) {
         inhoud = "Test oefening 1";
@@ -51,7 +52,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void showDescription(String naam) throws SQLException {
-        MyJDBC db = new MyJDBC();
+
         ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout WHERE name = '"+ naam + "'");
         discription.setText("");
         while (resultSet.next()) {
@@ -66,7 +67,6 @@ public class Controller implements Initializable {
 //        Image image = new Image(file.toURI().toString());
 //        workoutImage.setImage(image);
         discription.setText("");
-        MyJDBC db = new MyJDBC();
         ResultSet resultSet = null;
         String[] dbCategorie = {buik.getText(),schouders.getText(),armen.getText(),benen.getText()};
         for (int i = 0; i < dbCategorie.length; i++) {

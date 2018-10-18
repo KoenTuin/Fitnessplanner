@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fitnessplanner/models/pExercises.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fitnessplanner/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fitnessplanner/controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -114,12 +113,12 @@
         <counts>
           <entry key="dummy" value="17" />
           <entry key="fxml" value="10" />
-          <entry key="java" value="1657" />
+          <entry key="java" value="1660" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1657" />
+          <entry key="JAVA" value="1660" />
           <entry key="PLAIN_TEXT" value="17" />
           <entry key="XML" value="10" />
         </counts>
@@ -162,11 +161,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fitnessplanner/controllers/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="56" column="34" lean-forward="true" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+            <state relative-caret-position="799">
+              <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -174,16 +173,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-              <folding>
-                <element signature="e#442#443#0" expanded="true" />
-                <element signature="e#500#501#0" expanded="true" />
-                <element signature="e#550#551#0" expanded="true" />
-              </folding>
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -258,6 +252,7 @@
       <find>description</find>
       <find>image</find>
       <find>Test</find>
+      <find>JDBC</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -280,8 +275,8 @@
         <option value="$PROJECT_DIR$/src/fitnessplanner/Main.java" />
         <option value="$PROJECT_DIR$/src/fitnessplanner/models/PExercises.java" />
         <option value="$PROJECT_DIR$/src/fitnessplanner/models/pExercises.java" />
-        <option value="$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java" />
         <option value="$PROJECT_DIR$/src/fitnessplanner/controllers/Controller.java" />
+        <option value="$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java" />
       </list>
     </option>
   </component>
@@ -483,7 +478,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30458000" />
+    <option name="totallyTimeSpent" value="30521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -509,7 +504,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32884097" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3286334" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -623,6 +618,16 @@
     <entry file="file://$PROJECT_DIR$/Fitnessplanner.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/fitnessplanner/controllers/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/fitnessplanner/models/pExercises.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -633,22 +638,7 @@
     <entry file="file://$PROJECT_DIR$/src/fitnessplanner/models/Exercises.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-          <folding>
-            <element signature="e#442#443#0" expanded="true" />
-            <element signature="e#500#501#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fitnessplanner/controllers/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="56" column="34" lean-forward="true" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
         </state>
       </provider>
     </entry>
