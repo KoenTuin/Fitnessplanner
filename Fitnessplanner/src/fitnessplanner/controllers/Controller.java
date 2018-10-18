@@ -43,7 +43,7 @@ public class Controller implements Initializable {
 //        //select info from local database from right table
 //        MyJDBC db = new MyJDBC();
 //        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
-        System.out.println("It works");
+        System.out.println("Logged in");
         //Get from database data which is from catagory buik.gettext
 
 
@@ -61,10 +61,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //File file = new File("src/Test.png");resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Buik'");
-//        File file = new File("src/images/crunch.jpg");
-//        Image image = new Image(file.toURI().toString());
-//        workoutImage.setImage(image);
         discription.setText("");
         MyJDBC db = new MyJDBC();
         ResultSet resultSet = null;
@@ -82,26 +78,24 @@ public class Controller implements Initializable {
 
                     System.out.println("Naam: " + naam);
 //                label.setId(naam);
-                    label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            try {
-                                //shows the description
-                                showDescription(naam);
-                                //shows the image
-                                if (images != null) {
-                                    File file = new File("src/images/" + images);
-                                    Image image = new Image(file.toURI().toString());
-                                    workoutImage.setImage(image);
-                                }else {
-                                    workoutImage.setImage(null);
-                                }
-
-                            } catch (SQLException e) {
-                                System.out.println("A SQL excepption has occured\n" + e);
+                    //On mouse click show description
+                    label.setOnMouseClicked(event -> {
+                        try {
+                            //shows the description
+                            showDescription(naam);
+                            //shows the image
+                            if (images != null) {
+                                File file = new File("src/images/" + images);
+                                Image image = new Image(file.toURI().toString());
+                                workoutImage.setImage(image);
+                            }else {
+                                workoutImage.setImage(null);
                             }
 
+                        } catch (SQLException e) {
+                            System.out.println("A SQL excepption has occured\n" + e);
                         }
+
                     });
                     //adds label to the right parent
                     if (dbCategorie[i] == buik.getText()) {
@@ -118,81 +112,5 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
         }
-        //Koen oude code
-//        try {
-//
-//            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Shoulders'");
-//
-//            while (resultSet.next()) {
-//                String naam = resultSet.getString("name");
-//                Label label = new Label(naam);
-////                label.setId(naam);
-//                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//                    @Override
-//                    public void handle(MouseEvent event) {
-//                        try{
-//                            showDescription(naam);
-//                        }catch(SQLException e){
-//                            System.out.println("A SQL excepption has occured\n" + e);
-//                        }
-//
-//                    }
-//                });
-//                shoulderExcercises.getChildren().add(label);
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//
-//            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Armen'");
-//
-//            while (resultSet.next()) {
-//                String naam = resultSet.getString("name");
-//                Label label = new Label(naam);
-////                label.setId(naam);
-//                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//                    @Override
-//                    public void handle(MouseEvent event) {
-//                        try{
-//                            showDescription(naam);
-//                        }catch(SQLException e){
-//                            System.out.println("A SQL excepption has occured\n" + e);
-//                        }
-//
-//                    }
-//                });
-//                armenExcercises.getChildren().add(label);
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//
-//            resultSet = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Benen'");
-//
-//            while (resultSet.next()) {
-//                String naam = resultSet.getString("name");
-//                Label label = new Label(naam);
-////                label.setId(naam);
-//                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//                    @Override
-//                    public void handle(MouseEvent event) {
-//                        try{
-//                            showDescription(naam);
-//                        }catch(SQLException e){
-//                            System.out.println("A SQL excepption has occured\n" + e);
-//                        }
-//
-//                    }
-//                });
-//                benenExcercises.getChildren().add(label);
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 }
