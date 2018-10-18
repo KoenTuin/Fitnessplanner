@@ -1,5 +1,6 @@
 package fitnessplanner.controllers;
 
+import fitnessplanner.models.Exercise;
 import fitnessplanner.models.MyJDBC;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,14 +50,23 @@ public class Controller implements Initializable {
 
 
     }
-
+    //Created by Koen, gets discription for an exercise by name from the database.
     @FXML
     public void showDescription(String naam) throws SQLException {
 
-        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout WHERE name = '"+ naam + "'");
+        ResultSet name = db.executeResultSetQuery("SELECT * FROM workout WHERE name = '" + naam + "'y");
+
+        String w_name = name.toString();
+        int w_id = name.getInt("workout_id");
+        String w_tA = name.getString("description");
+
+        //If naam is the same as the name from the exercise class.
+
+        Exercise oef = new Exercise(w_name, w_id, w_tA );
+
         discription.setText("");
-        while (resultSet.next()) {
-            discription.appendText(resultSet.getString("description") + "\n");
+        while (name.next()) {
+            discription.appendText(name.getString("description") + "\n");
         }
     }
 
