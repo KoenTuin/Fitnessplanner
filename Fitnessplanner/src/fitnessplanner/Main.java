@@ -19,7 +19,7 @@ public class Main extends Application {
         primaryStage.show();
 
         // test myjdbc
-        MyJDBC db = new MyJDBC();
+        MyJDBC db = MyJDBC.getDatabase();
         ResultSet resultSet = db.executeResultSetQuery("SELECT * FROM category");
 
         while ( resultSet.next() ){

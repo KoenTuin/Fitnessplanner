@@ -1,5 +1,7 @@
 package fitnessplanner.controllers;
 
+import fitnessplanner.mapper.exerciseMapper;
+import fitnessplanner.models.Exercises;
 import fitnessplanner.models.MyJDBC;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -32,7 +35,7 @@ public class Controller implements Initializable {
     public VBox armenExcercises;
     public VBox benenExcercises;
     public ImageView workoutImage;
-    MyJDBC db = new MyJDBC();
+    MyJDBC db = MyJDBC.getDatabase();
 
     public void button(ActionEvent actionEvent) {
         inhoud = "Test oefening 1";
@@ -45,10 +48,19 @@ public class Controller implements Initializable {
 //        MyJDBC db = new MyJDBC();
 //        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
         System.out.println("It works");
-        //Get from database data which is from catagory buik.gettext
 
+        exerciseMapper exMapper = new exerciseMapper();
+        ArrayList<Exercises> exList = (ArrayList)exMapper.exerciseList;
+        System.out.println(exMapper.test);
+        for (int i = 0; i < exList.size(); i++) {
+            System.out.println(exList.get(i).getDescription());
+        }
 
     }
+    //Get from database data which is from catagory buik.gettext
+
+
+
 
     @FXML
     public void showDescription(String naam) throws SQLException {
@@ -76,10 +88,11 @@ public class Controller implements Initializable {
                 resultSet = db.executeResultSetQuery("SELECT name,image FROM workout WHERE category = '" + dbCategorie[i] + "'");
 
                 while (resultSet.next()) {
+
                     String naam = resultSet.getString("name");
                     Label label = new Label(naam);
                     String images = resultSet.getString("image");
-
+                    Exercises ex = new Exercises(naam,0,null);
                     System.out.println("Naam: " + naam);
 //                label.setId(naam);
                     label.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -87,6 +100,7 @@ public class Controller implements Initializable {
                         public void handle(MouseEvent event) {
                             try {
                                 //shows the description
+
                                 showDescription(naam);
                                 //shows the image
                                 if (images != null) {
