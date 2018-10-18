@@ -21,3 +21,4 @@
 hs_err_pid*
 Fitnessplanner/.idea/workspace.xml
 Fitnessplanner/src/fitnessplanner/models/MyJDBC.java
+*.xml
