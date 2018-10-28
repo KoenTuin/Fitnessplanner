@@ -55,24 +55,6 @@ public class MenuController implements Initializable {
     MyJDBC db = MyJDBC.getDatabase();
 
 
-    @FXML
-    public void showExcercises() throws SQLException {
-//        //select info from local database from right table
-//        MyJDBC db = new MyJDBC();
-//        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
-//        System.out.println("It works");
-//
-//        exerciseMapper exMapper = new exerciseMapper();
-//        ArrayList<Exercises> exList = (ArrayList)exMapper.exerciseList;
-//        System.out.println(exMapper.test);
-//        for (int i = 0; i < exList.size(); i++) {
-//            System.out.println(exList.get(i).getDescription());
-//        }
-
-    }
-    //Get from database data which is from catagory buik.gettext
-
-
     public void showImage(String image) {
         if (image != null) {
 
