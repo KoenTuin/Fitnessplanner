@@ -21,21 +21,29 @@ public class MyJDBC {
 
     // remembers the first error message on the connection
     private String errorMessage = null;
+    public static MyJDBC myJDBC;
 
+    //Singleton
+    public static MyJDBC  getDatabase(){
+        if (myJDBC == null){
+            myJDBC = new MyJDBC();
+        }
+        return myJDBC;
+    }
     // constructors
-    public MyJDBC() {
+   private  MyJDBC() {
         this(DB_DEFAULT_DATABASE, DB_DEFAULT_SERVER_URL, DB_DEFAULT_ACCOUNT, DB_DEFAULT_PASSWORD);
     }
 
-    public MyJDBC(String dbName) {
+    private MyJDBC(String dbName) {
         this(dbName, DB_DEFAULT_SERVER_URL, DB_DEFAULT_ACCOUNT, DB_DEFAULT_PASSWORD);
     }
 
-    public MyJDBC(String dbName, String account, String password) {
+    private MyJDBC(String dbName, String account, String password) {
         this(dbName, DB_DEFAULT_SERVER_URL, account, password);
     }
 
-    public MyJDBC(String dbName, String serverURL, String account, String password) {
+    private  MyJDBC(String dbName, String serverURL, String account, String password) {
         try {
             // verify that a proper JDBC driver has been installed and linked
             if (!selectDriver(DB_DRIVER_URL)) {
