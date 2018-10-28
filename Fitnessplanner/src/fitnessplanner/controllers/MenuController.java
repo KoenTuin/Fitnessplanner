@@ -73,18 +73,24 @@ public class MenuController implements Initializable {
     //Get from database data which is from catagory buik.gettext
 
 
-    public void showImage(String image){
+    public void showImage(String image) {
         if (image != null) {
-            File file = new File("src/resources/images/" + image);
-            System.out.println("Image path: " + file);
+
+            String standardPath = "src/resources/images/";
+            File file = new File(standardPath + image);
             Image newImage = new Image(file.toURI().toString());
+
             workoutImage.setImage(newImage);
+
         } else {
             workoutImage.setImage(null);
         }
     }
 
+
+
     @FXML
+
     public void showDescription(String naam) {
         List<Exercises> listOfExercises = exercisesList.listOfExercises;
         for (Exercises e : listOfExercises) {
@@ -100,48 +106,49 @@ public class MenuController implements Initializable {
     }
 
     public void loadCategoryExercises() {
+
         discription.setText("");
-        ResultSet resultSet = null;
-        String[] dbCategorie = {buik.getText(), schouders.getText(), armen.getText(), benen.getText()};
-        for (int i = 0; i < dbCategorie.length; i++) {
+        String category = "";
 
-            try {
+        for (Exercises e : exercisesList.listOfExercises) {
+            category = e.getCategory();
+        }
 
-                resultSet = db.executeResultSetQuery("SELECT name,image FROM workout WHERE category = '" + dbCategorie[i] + "'");
+        String[] dbCategory = {buik.getText(), schouders.getText(), armen.getText(), benen.getText()};
+        for (int i = 0; i < dbCategory.length; i++) {
 
-                while (resultSet.next()) {
+            for (Exercises e : exercisesList.listOfExercises) {
+                if (category.equals(dbCategory[i])) {
 
-                    String naam = resultSet.getString("name");
-                    Label label = new Label(naam);
-                    String image = resultSet.getString("image");
-                    Exercises ex = new Exercises(naam, 0, null);
-                    System.out.println("Naam: " + naam);
-//                label.setId(naam);
+                    String name = e.getExercisesName();
+                    String image = e.getImage();
+                    Label label = new Label(name);
+
                     label.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             //shows the description
-                            showDescription(naam);
+                            showDescription(name);
                             //shows the image
                             showImage(image);
                         }
                     });
                     //adds label to the right parent
-                    if (dbCategorie[i] == buik.getText()) {
+                    if (e.getCategory().equals(buik.getText())) {
                         buikExcercises.getChildren().add(label);
-                    } else if (dbCategorie[i] == schouders.getText()) {
+                    } else if (e.getCategory().equals(schouders.getText())) {
                         shoulderExcercises.getChildren().add(label);
-                    } else if (dbCategorie[i] == armen.getText()) {
+                    } else if (e.getCategory().equals(armen.getText())) {
                         armenExcercises.getChildren().add(label);
-                    } else if (dbCategorie[i] == benen.getText()) {
+                    } else if (e.getCategory().equals(benen.getText())) {
                         benenExcercises.getChildren().add(label);
                     }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+
         }
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

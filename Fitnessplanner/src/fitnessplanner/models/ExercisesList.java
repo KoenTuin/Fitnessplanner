@@ -14,12 +14,14 @@ public class ExercisesList {
         ResultSet resultSet;
 
         try {
-            resultSet = db.executeResultSetQuery("SELECT name, workout_id, description FROM workout ");
+            resultSet = db.executeResultSetQuery("SELECT name, workout_id, description, image, category FROM workout ");
             while (resultSet.next()) {
                 String name = (resultSet.getString("name"));
                 int id = (resultSet.getInt("workout_id"));
                 String description = (resultSet.getString("description"));
-                Exercises exercise = new Exercises(name, id, description);
+                String image = (resultSet.getString("image"));
+                String category = (resultSet.getString("category"));
+                Exercises exercise = new Exercises(name, id, description, image, category);
 
                 exercises.add(exercise);
             }
