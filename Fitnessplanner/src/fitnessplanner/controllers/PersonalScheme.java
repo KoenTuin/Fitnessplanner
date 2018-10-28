@@ -34,7 +34,7 @@ public class PersonalScheme {
 //
 //        table.setItems(bagagetabel);
     }
-
+    
 
     @FXML
     public void deleteExercise(){
