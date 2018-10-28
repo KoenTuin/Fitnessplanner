@@ -1,9 +1,7 @@
 package fitnessplanner.controllers;
 
-import fitnessplanner.mapper.exerciseMapper;
 import fitnessplanner.models.Exercises;
-import fitnessplanner.models.MyJDBC;
-import javafx.event.ActionEvent;
+import fitnessplanner.database.Database;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +15,6 @@ import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -47,12 +44,17 @@ public class MenuController implements Initializable {
     private VBox benenExcercises;
     @FXML
     private ImageView workoutImage;
-    MyJDBC db = MyJDBC.getDatabase();
+    Database db = Database.getDatabase();
+
+    @FXML
+    public void showScheme(){
+        System.out.println("Go to personal scheme");
+    }
 
     @FXML
     public void showExcercises() throws SQLException {
 //        //select info from local database from right table
-//        MyJDBC db = new MyJDBC();
+//        Database db = new Database();
 //        ResultSet resultSet = db.executeResultSetQuery("SELECT description FROM workout");
 //        System.out.println("It works");
 //

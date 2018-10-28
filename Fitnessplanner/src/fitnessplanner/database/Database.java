@@ -1,9 +1,9 @@
-package fitnessplanner.models;
+package fitnessplanner.database;
 
 import java.sql.*;
 import java.util.Enumeration;
 
-public class MyJDBC {
+public class Database {
 
     private static final String DB_DEFAULT_DATABASE = "fitness_database";
     private static final String DB_DEFAULT_SERVER_URL = "localhost";
@@ -21,29 +21,29 @@ public class MyJDBC {
 
     // remembers the first error message on the connection
     private String errorMessage = null;
-    public static MyJDBC myJDBC;
+    public static Database database;
 
     //Singleton
-    public static MyJDBC  getDatabase(){
-        if (myJDBC == null){
-            myJDBC = new MyJDBC();
+    public static Database getDatabase(){
+        if (database == null){
+            database = new Database();
         }
-        return myJDBC;
+        return database;
     }
     // constructors
-   private  MyJDBC() {
+   private Database() {
         this(DB_DEFAULT_DATABASE, DB_DEFAULT_SERVER_URL, DB_DEFAULT_ACCOUNT, DB_DEFAULT_PASSWORD);
     }
 
-    private MyJDBC(String dbName) {
+    private Database(String dbName) {
         this(dbName, DB_DEFAULT_SERVER_URL, DB_DEFAULT_ACCOUNT, DB_DEFAULT_PASSWORD);
     }
 
-    private MyJDBC(String dbName, String account, String password) {
+    private Database(String dbName, String account, String password) {
         this(dbName, DB_DEFAULT_SERVER_URL, account, password);
     }
 
-    private  MyJDBC(String dbName, String serverURL, String account, String password) {
+    private Database(String dbName, String serverURL, String account, String password) {
         try {
             // verify that a proper JDBC driver has been installed and linked
             if (!selectDriver(DB_DRIVER_URL)) {
@@ -216,7 +216,7 @@ public class MyJDBC {
      */
     public void log(String message) {
         if (isVerbose()) {
-            System.out.println("MyJDBC: " + message);
+            System.out.println("Database: " + message);
         }
     }
 
@@ -227,7 +227,7 @@ public class MyJDBC {
      * @param e
      */
     public final void error(Exception e) {
-        String msg = "MyJDBC-" + e.getClass().getName() + ": " + e.getMessage();
+        String msg = "Database-" + e.getClass().getName() + ": " + e.getMessage();
 
         // capture the message of the first error of the connection
         if (this.errorMessage == null) {
@@ -249,40 +249,40 @@ public class MyJDBC {
         System.out.println("Creating the " + dbName + " database...");
 
         // use the sys schema for creating another db
-        MyJDBC sysJDBC = new MyJDBC("sys");
+        Database sysJDBC = new Database("sys");
         sysJDBC.executeUpdateQuery("CREATE DATABASE IF NOT EXISTS " + dbName);
         sysJDBC.close();
 
         // create or truncate Airport table in the Airline database
         System.out.println("Creating the Airport table...");
-        MyJDBC myJDBC = new MyJDBC(dbName);
-        myJDBC.executeUpdateQuery("CREATE TABLE IF NOT EXISTS Airport ("
+        Database database = new Database(dbName);
+        database.executeUpdateQuery("CREATE TABLE IF NOT EXISTS Airport ("
                 + " IATACode VARCHAR(3) NOT NULL PRIMARY KEY,"
                 + " Name VARCHAR(45),"
                 + " TimeZone INT(3) )");
 
         // truncate Airport, in case some data was already there
-        myJDBC.executeUpdateQuery("TRUNCATE TABLE Airport");
+        database.executeUpdateQuery("TRUNCATE TABLE Airport");
 
         // Populate the Airport table in the Airline database
         System.out.println("Populating with Airport information...");
-        myJDBC.executeUpdateQuery("INSERT INTO Airport VALUES ("
+        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
                 + "'AMS', 'Schiphol Amsterdam', 1 )");
-        myJDBC.executeUpdateQuery("INSERT INTO Airport VALUES ("
+        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
                 + "'LHR', 'London Heathrow', 0 )");
-        myJDBC.executeUpdateQuery("INSERT INTO Airport VALUES ("
+        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
                 + "'BRU', 'Brussels Airport', 1 )");
-        myJDBC.executeUpdateQuery("INSERT INTO Airport VALUES ("
+        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
                 + "'ESB', 'Ankara Esenboğa Airport', 2 )");
-        myJDBC.executeUpdateQuery("INSERT INTO Airport VALUES ("
+        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
                 + "'SUF', 'Sant\\'Eufemia Lamezia International Airport', 1 )");
-        myJDBC.executeUpdateQuery("INSERT INTO Airport VALUES ("
+        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
                 + "'HKG', 'Hong Kong International', 8 )");
 
         // echo all airports in timezone 1
         System.out.println("Known Airports in time zone 1:");
         try {
-            ResultSet rs = myJDBC.executeResultSetQuery(
+            ResultSet rs = database.executeResultSetQuery(
                     "SELECT IATACode, Name FROM AirPort WHERE TimeZone=1");
             while (rs.next()) {
                 // echo the info of the next airport found
@@ -294,11 +294,11 @@ public class MyJDBC {
             rs.close();
 
         } catch (SQLException ex) {
-            myJDBC.error(ex);
+            database.error(ex);
         }
 
         // close the connection with the database
-        myJDBC.close();
+        database.close();
     }
 
     public boolean isVerbose() {

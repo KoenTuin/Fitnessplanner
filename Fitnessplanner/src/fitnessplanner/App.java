@@ -10,13 +10,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/views/Menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/views/menu.fxml"));
         primaryStage.setTitle("Fitness applicatie");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
         // test myjdbc
-//        MyJDBC db = MyJDBC.getDatabase();
+//        Database db = Database.getDatabase();
 //        ResultSet resultSet = db.executeResultSetQuery("SELECT * FROM category");
 //
 //        while ( resultSet.next() ){

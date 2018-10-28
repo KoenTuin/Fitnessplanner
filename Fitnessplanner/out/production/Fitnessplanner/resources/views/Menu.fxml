@@ -57,7 +57,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button id="vulOefeningen" fx:id="showScheme" mnemonicParsing="false" onAction="#showExcercises" onMouseClicked="#showExcercises" text="Workout scheme" />
+                  <Button id="vulOefeningen" fx:id="showScheme" mnemonicParsing="false" onAction="#showScheme" onMouseClicked="#showExcercises" text="Workout scheme" />
                   <Button fx:id="voegToe" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Voeg toe" />
                </children>
             </HBox>
