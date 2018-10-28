@@ -4,12 +4,12 @@ import javafx.scene.control.TextArea;
 
 import java.awt.*;
 
-public class pExercises extends Exercises {
+public class PersonalExercises extends Exercises {
 
     private String createdBy;
 
 
-    public pExercises(String exercisesName, int exerciseId, String description) {
+    public PersonalExercises(String exercisesName, int exerciseId, String description) {
         super(exercisesName, exerciseId, description);
     }
 }
