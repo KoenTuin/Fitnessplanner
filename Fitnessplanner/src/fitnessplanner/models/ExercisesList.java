@@ -1,5 +1,7 @@
 package fitnessplanner.models;
 
+import fitnessplanner.database.Database;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 
 public class ExercisesList {
     public List<Exercises> listOfExercises;
-    MyJDBC db = MyJDBC.getDatabase();
+    Database db = Database.getDatabase();
 
     public List<Exercises> loadExercises() {
         List<Exercises> exercises = new ArrayList<>();
