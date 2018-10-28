@@ -1,6 +1,7 @@
 package fitnessplanner.controllers;
 
 import fitnessplanner.models.Exercises;
+import fitnessplanner.models.ExercisesList;
 import fitnessplanner.models.MyJDBC;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import java.io.File;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,8 +46,14 @@ public class MenuController implements Initializable {
     private VBox benenExcercises;
     @FXML
     private ImageView workoutImage;
-    private List<Exercises> exercises;
+
+    //create instance of ExercisesList to access its variables and methods to set a value to the public listOfExercises
+    //in ExercisesList via the initialize (this has to be done here, because this controller will be used at the start
+    // of the program)
+    private ExercisesList exercisesList = new ExercisesList();
+
     MyJDBC db = MyJDBC.getDatabase();
+
 
     @FXML
     public void showExcercises() throws SQLException {
@@ -66,29 +72,6 @@ public class MenuController implements Initializable {
     }
     //Get from database data which is from catagory buik.gettext
 
-    private List<Exercises> loadExercises() {
-        List<Exercises> exercises = new ArrayList<>();
-        ResultSet resultSet;
-
-        try {
-            resultSet = db.executeResultSetQuery("SELECT name, workout_id, description FROM workout ");
-            while (resultSet.next()){
-                String name = (resultSet.getString("name"));
-                int id = (resultSet.getInt("workout_id"));
-                String description = (resultSet.getString("description"));
-                Exercises exercise = new Exercises(name, id, description);
-
-                exercises.add(exercise);
-            }
-        }catch(SQLException e){
-            System.out.println(e);
-        }
-        for (Exercises e: exercises) {
-            System.out.println(e);
-        }
-        return exercises;
-    }
-
 
     public void showImage(String image){
         if (image != null) {
@@ -103,8 +86,8 @@ public class MenuController implements Initializable {
 
     @FXML
     public void showDescription(String naam) {
-
-        for (Exercises e:exercises) {
+        List<Exercises> listOfExercises = exercisesList.listOfExercises;
+        for (Exercises e : listOfExercises) {
             try {
                 if (e.getExercisesName().equals(naam)) {
                     discription.setText("");
@@ -162,7 +145,7 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        exercises = loadExercises();
+        exercisesList.listOfExercises = exercisesList.loadExercises();
         loadCategoryExercises();
 
 

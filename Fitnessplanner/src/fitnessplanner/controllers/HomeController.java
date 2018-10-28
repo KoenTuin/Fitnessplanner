@@ -1,4 +1,6 @@
 package fitnessplanner.controllers;
 
-public class HomeController {
+
+public class HomeController{
+
 }
