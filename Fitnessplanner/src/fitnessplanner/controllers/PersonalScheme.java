@@ -1,15 +1,20 @@
 package fitnessplanner.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
 
-import javax.swing.text.TableView;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PersonalScheme {
+public class PersonalScheme implements Initializable {
     @FXML
-    private TableView schemeListView;
+    private TableView schemeTableView;
+
+    @FXML
+    public void schemeTableView(){
 
 
-    public void setTableViewData(){
 //        while (resultSet.next()) {
 //            Vhousenumber = resultSet.getString("Vhousenumber");
 //            Vcity = resultSet.getString("Vcity");
@@ -46,7 +51,8 @@ public class PersonalScheme {
     }
 
 
-
-
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        schemeTableView();
+    }
 }
