@@ -1,16 +1,20 @@
 package fitnessplanner.models;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Exercises {
     private String exercisesName;
     private int exerciseId;
-    private String description;
+    private String description;;
+    private String Image;
 
-
-    public Exercises(String exercisesName, int exerciseId, String description) {
+    public Exercises(String exercisesName, int exerciseId, String description, String image) {
         this.exercisesName = exercisesName;
         this.exerciseId = exerciseId;
         this.description = description;
+        this.Image = image;
     }
 
     public String getExercisesName() {
@@ -29,7 +33,13 @@ public class Exercises {
         this.exerciseId = exerciseId;
     }
 
+    public String getImage() {
+        return Image;
+    }
 
+    public void setImage(String image) {
+        Image = image;
+    }
 
     public String getDescription() throws SQLException {
         return description;

@@ -2,6 +2,7 @@ package fitnessplanner.controllers;
 
 import fitnessplanner.models.Exercises;
 import fitnessplanner.database.Database;
+import fitnessplanner.models.ExercisesList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -68,6 +70,13 @@ public class MenuController implements Initializable {
         Scene editPriceDialog = new Scene(editPriceDialogRoot);
     }
 
+
+    //create instance of ExercisesList to access its variables and methods to set a value to the public listOfExercises
+    //in ExercisesList via the initialize (this has to be done here, because this controller will be used at the start
+    // of the program)
+    private ExercisesList exercisesList = new ExercisesList();
+
+
     @FXML
     public void showExcercises() throws SQLException {
 //        //select info from local database from right table
@@ -85,6 +94,7 @@ public class MenuController implements Initializable {
     }
     //Get from database data which is from catagory buik.gettext
 
+
     public void showImage(String image){
         if (image != null) {
             File file = new File("src/resources/images/" + image);
@@ -98,21 +108,20 @@ public class MenuController implements Initializable {
 
     @FXML
     public void showDescription(String naam) {
-
-        ResultSet resultSet = null;
-        try {
-            resultSet = db.executeResultSetQuery("SELECT description FROM workout WHERE name = '" + naam + "'");
-
-            discription.setText("");
-            while (resultSet.next()) {
-                discription.appendText(resultSet.getString("description") + "\n");
+        List<Exercises> listOfExercises = exercisesList.listOfExercises;
+        for (Exercises e : listOfExercises) {
+            try {
+                if (e.getExercisesName().equals(naam)) {
+                    discription.setText("");
+                    discription.appendText(e.getDescription() + "\n");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
-    public void loadDescription() {
+    public void loadCategoryExercises() {
         discription.setText("");
         ResultSet resultSet = null;
         String[] dbCategorie = {buik.getText(), schouders.getText(), armen.getText(), benen.getText()};
@@ -127,7 +136,7 @@ public class MenuController implements Initializable {
                     String naam = resultSet.getString("name");
                     Label label = new Label(naam);
                     String image = resultSet.getString("image");
-                    Exercises ex = new Exercises(naam, 0, null);
+                    Exercises ex = new Exercises(naam, 0, null, image);
                     System.out.println("Naam: " + naam);
 //                label.setId(naam);
                     label.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -158,6 +167,9 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadDescription();
+        exercisesList.listOfExercises = exercisesList.loadExercises();
+        loadCategoryExercises();
+
+
     }
 }
