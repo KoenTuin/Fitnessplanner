@@ -4,14 +4,21 @@ import fitnessplanner.models.Exercises;
 import fitnessplanner.database.Database;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,11 +51,21 @@ public class MenuController implements Initializable {
     private VBox benenExcercises;
     @FXML
     private ImageView workoutImage;
+    @FXML
+    private BorderPane menuScreen;
     Database db = Database.getDatabase();
 
     @FXML
-    public void showScheme(){
+    public void showScheme()throws IOException {
         System.out.println("Go to personal scheme");
+        //laad de nieuwe table in de bestaande anchorpane
+//        menuScreen.getChildren().setAll(FXMLLoader.load("../../../resources/views/personalScheme.fxml"));
+
+        Stage editPriceDialogStage = new Stage();
+        Parent editPriceDialogRoot = FXMLLoader.load(
+                getClass().getResource("../resources/views/personalScheme.fxml")
+        );
+        Scene editPriceDialog = new Scene(editPriceDialogRoot);
     }
 
     @FXML
