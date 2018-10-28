@@ -13,13 +13,18 @@
          <children>
             <HBox prefHeight="150.0" prefWidth="646.0">
                <children>
-                  <ListView fx:id="schemeListView" prefHeight="150.0" prefWidth="648.0" />
+                  <TableView fx:id="schemeTableView" prefHeight="150.0" prefWidth="646.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#deleteExercise" text="Delete" />
-                  <Button id="vulOefeningen" mnemonicParsing="false" onAction="#showExercises" onMouseClicked="#showExcercises" text="Exercises" />
+                  <Button id="vulOefeningen" mnemonicParsing="false" onAction="#showExercises" text="Exercises" />
                </children>
             </HBox>
          </children>
