@@ -23,6 +23,7 @@ public class MyJDBC {
     private String errorMessage = null;
     public static MyJDBC myJDBC;
 
+    //Singleton
     public static MyJDBC  getDatabase(){
         if (myJDBC == null){
             myJDBC = new MyJDBC();

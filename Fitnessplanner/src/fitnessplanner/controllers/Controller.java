@@ -104,7 +104,8 @@ public class Controller implements Initializable {
                                 showDescription(naam);
                                 //shows the image
                                 if (images != null) {
-                                    File file = new File("src/images/" + images);
+                                    File file = new File("src/resources/images/" + images);
+                                    System.out.println("Image path: "+file);
                                     Image image = new Image(file.toURI().toString());
                                     workoutImage.setImage(image);
                                 }else {
