@@ -1,11 +1,13 @@
 package fitnessplanner.models;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Exercises {
     private String exercisesName;
     private int exerciseId;
-    private String description;
-
+    private String description;;
 
     public Exercises(String exercisesName, int exerciseId, String description) {
         this.exercisesName = exercisesName;

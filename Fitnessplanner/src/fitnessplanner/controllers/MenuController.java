@@ -1,9 +1,7 @@
 package fitnessplanner.controllers;
 
-import fitnessplanner.mapper.exerciseMapper;
 import fitnessplanner.models.Exercises;
 import fitnessplanner.models.MyJDBC;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +16,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -47,6 +46,7 @@ public class MenuController implements Initializable {
     private VBox benenExcercises;
     @FXML
     private ImageView workoutImage;
+    private List<Exercises> exercises;
     MyJDBC db = MyJDBC.getDatabase();
 
     @FXML
@@ -66,6 +66,30 @@ public class MenuController implements Initializable {
     }
     //Get from database data which is from catagory buik.gettext
 
+    private List<Exercises> loadExercises() {
+        List<Exercises> exercises = new ArrayList<>();
+        ResultSet resultSet;
+
+        try {
+            resultSet = db.executeResultSetQuery("SELECT name, workout_id, description FROM workout ");
+            while (resultSet.next()){
+                String name = (resultSet.getString("name"));
+                int id = (resultSet.getInt("workout_id"));
+                String description = (resultSet.getString("description"));
+                Exercises exercise = new Exercises(name, id, description);
+
+                exercises.add(exercise);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        for (Exercises e: exercises) {
+            System.out.println(e);
+        }
+        return exercises;
+    }
+
+
     public void showImage(String image){
         if (image != null) {
             File file = new File("src/resources/images/" + image);
@@ -80,20 +104,19 @@ public class MenuController implements Initializable {
     @FXML
     public void showDescription(String naam) {
 
-        ResultSet resultSet = null;
-        try {
-            resultSet = db.executeResultSetQuery("SELECT description FROM workout WHERE name = '" + naam + "'");
-
-            discription.setText("");
-            while (resultSet.next()) {
-                discription.appendText(resultSet.getString("description") + "\n");
+        for (Exercises e:exercises) {
+            try {
+                if (e.getExercisesName().equals(naam)) {
+                    discription.setText("");
+                    discription.appendText(e.getDescription() + "\n");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
-    public void loadDescription() {
+    public void loadCategoryExercises() {
         discription.setText("");
         ResultSet resultSet = null;
         String[] dbCategorie = {buik.getText(), schouders.getText(), armen.getText(), benen.getText()};
@@ -139,6 +162,9 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadDescription();
+        exercises = loadExercises();
+        loadCategoryExercises();
+
+
     }
 }
