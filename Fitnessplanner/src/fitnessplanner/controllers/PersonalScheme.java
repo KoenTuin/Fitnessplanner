@@ -10,9 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import models.Exercises;
 import models.PersonalExercisesList;
 
@@ -34,10 +32,6 @@ public class PersonalScheme implements Initializable {
 
     ObservableList<Exercises> personalExercises = FXCollections.observableArrayList(personalListOfExercises.PersonalListOfExercises);
 
-//    public ObservableList<Exercises> getPersonalExercises(){
-//
-//
-//    }
 
     @FXML
     public void schemeTableView(){
@@ -55,12 +49,17 @@ public class PersonalScheme implements Initializable {
         schemeTableView.getColumns().addAll(nameColumn, descriptionColumn);
 
         setTable.getChildren().addAll(schemeTableView);
-//
+
     }
     
 
     @FXML
     public void deleteExercise(ActionEvent event){
+        ObservableList<Exercises> exerciseSelected, allExercises;
+        allExercises = schemeTableView.getItems();
+        exerciseSelected = schemeTableView.getSelectionModel().getSelectedItems();
+
+        exerciseSelected.forEach(allExercises::remove);
 
     }
     @FXML
