@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class PersonalScheme implements Initializable {
+public class PersonalSchemeController implements Initializable {
     @FXML
     private TableView<Exercises> schemeTableView;
 
