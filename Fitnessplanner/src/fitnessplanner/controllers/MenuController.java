@@ -75,6 +75,7 @@ public class MenuController implements Initializable {
                     if (checkIfDouble(e, textDescription)) {
                         personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
                         System.out.println("New list: value added to list");
+
                         for (Exercises f : personalListOfExercises.PersonalListOfExercises) {
                             System.out.println(f);
                         }
@@ -94,10 +95,7 @@ public class MenuController implements Initializable {
         for (Exercises e : personalListOfExercises.PersonalListOfExercises) {
             if (description.equals(e.getDescription().replaceAll("\\s+", ""))) {
                 waarde = false;
-            } else {
-                waarde = true;
             }
-
         }
         return waarde;
     }
