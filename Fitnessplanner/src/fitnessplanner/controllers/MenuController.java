@@ -112,8 +112,6 @@ public class MenuController implements Initializable {
     public void showScheme(ActionEvent event) throws IOException {
         //laad de nieuwe table in de bestaande anchorpane
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/personalScheme.fxml"));
-        PersonalScheme test = new PersonalScheme();
-        test.schemeTableView();
         //maakt de oude table leeg
         menuScreenSwitch.getChildren().setAll();
         //laad de nieuwe table in
