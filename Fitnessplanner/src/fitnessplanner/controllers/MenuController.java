@@ -1,8 +1,9 @@
-package fitnessplanner.controllers;
+package controllers;
 
-import fitnessplanner.models.Exercises;
-import fitnessplanner.database.Database;
-import fitnessplanner.models.ExercisesList;
+import models.Exercises;
+import database.Database;
+import models.ExercisesList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -53,98 +55,108 @@ public class MenuController implements Initializable {
     private ImageView workoutImage;
     @FXML
     private BorderPane menuScreen;
+    @FXML
+    private AnchorPane menuScreenSwitch;
     private ExercisesList exercisesList = new ExercisesList();
 
     @FXML
-    public void showScheme() throws IOException {
-        System.out.println("Go to personal scheme");
-        //laad de nieuwe table in de bestaande anchorpane
-//        menuScreen.getChildren().setAll(FXMLLoader.load("../../../resources/views/personalScheme.fxml"));
 
-        Stage editPriceDialogStage = new Stage();
-        Parent editPriceDialogRoot = FXMLLoader.load(
-                getClass().getResource("../resources/views/personalScheme.fxml")
-        );
-        Scene editPriceDialog = new Scene(editPriceDialogRoot);
-    }
+        public void addExerciseToPersonalList () {
 
-
-    public void showImage(String image) {
-        if (image != null) {
-
-            String standardPath = "src/resources/images/";
-            File file = new File(standardPath + image);
-            Image newImage = new Image(file.toURI().toString());
-
-            workoutImage.setImage(newImage);
-
-        } else {
-            workoutImage.setImage(null);
         }
-    }
 
 
-    @FXML
-    public void showDescription(String naam) {
-        List<Exercises> listOfExercises = exercisesList.listOfExercises;
-        for (Exercises e : listOfExercises) {
-            if (e.getExercisesName().equals(naam)) {
-                discription.setText("");
-                discription.appendText(e.getDescription() + "\n");
+        @FXML
+        public void showScheme (ActionEvent event)throws IOException {
+            //laad de nieuwe table in de bestaande anchorpane
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/personalScheme.fxml"));
+            //maakt de oude table leeg
+            menuScreenSwitch.getChildren().setAll();
+            //laad de nieuwe table in
+            menuScreenSwitch.getChildren().setAll(pane);
+            //geeft de nieuwe table de juiste groote
+            pane.prefWidthProperty().bind(menuScreenSwitch.widthProperty());
+            pane.prefHeightProperty().bind(menuScreenSwitch.heightProperty());
+        }
+
+
+        public void showImage (String image){
+            if (image != null) {
+
+                String standardPath = "src/resources/images/";
+                File file = new File(standardPath + image);
+                Image newImage = new Image(file.toURI().toString());
+
+                workoutImage.setImage(newImage);
+
+            } else {
+                workoutImage.setImage(null);
             }
         }
-    }
 
 
-    public void loadCategoryExercises() {
-
-        discription.setText("");
-        String category = "";
-
-        for (Exercises e : exercisesList.listOfExercises) {
-            category = e.getCategory();
-        }
-
-        String[] dbCategory = {buik.getText(), schouders.getText(), armen.getText(), benen.getText()};
-        for (int i = 0; i < dbCategory.length; i++) {
-
-            for (Exercises e : exercisesList.listOfExercises) {
-                if (category.equals(dbCategory[i])) {
-
-                    String name = e.getExercisesName();
-                    String image = e.getImage();
-                    Label label = new Label(name);
-
-                    label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            //shows the description
-                            showDescription(name);
-                            //shows the image
-                            showImage(image);
-                        }
-                    });
-                    //adds label to the right parent
-                    if (e.getCategory().equals(buik.getText())) {
-                        buikExcercises.getChildren().add(label);
-                    } else if (e.getCategory().equals(schouders.getText())) {
-                        shoulderExcercises.getChildren().add(label);
-                    } else if (e.getCategory().equals(armen.getText())) {
-                        armenExcercises.getChildren().add(label);
-                    } else if (e.getCategory().equals(benen.getText())) {
-                        benenExcercises.getChildren().add(label);
-                    }
+        @FXML
+        public void showDescription (String naam){
+            List<Exercises> listOfExercises = exercisesList.listOfExercises;
+            for (Exercises e : listOfExercises) {
+                if (e.getExercisesName().equals(naam)) {
+                    discription.setText("");
+                    discription.appendText(e.getDescription() + "\n");
                 }
             }
+        }
 
+
+        public void loadCategoryExercises () {
+
+            discription.setText("");
+            String category = "";
+
+            for (Exercises e : exercisesList.listOfExercises) {
+                category = e.getCategory();
+            }
+
+            String[] dbCategory = {buik.getText(), schouders.getText(), armen.getText(), benen.getText()};
+            for (int i = 0; i < dbCategory.length; i++) {
+
+                for (Exercises e : exercisesList.listOfExercises) {
+                    if (category.equals(dbCategory[i])) {
+
+                        String name = e.getExercisesName();
+                        String image = e.getImage();
+                        Label label = new Label(name);
+
+                        label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                //shows the description
+                                showDescription(name);
+                                //shows the image
+                                showImage(image);
+                            }
+                        });
+                        //adds label to the right parent
+                        if (e.getCategory().equals(buik.getText())) {
+                            buikExcercises.getChildren().add(label);
+                        } else if (e.getCategory().equals(schouders.getText())) {
+                            shoulderExcercises.getChildren().add(label);
+                        } else if (e.getCategory().equals(armen.getText())) {
+                            armenExcercises.getChildren().add(label);
+                        } else if (e.getCategory().equals(benen.getText())) {
+                            benenExcercises.getChildren().add(label);
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        @Override
+
+        public void initialize (URL location, ResourceBundle resources){
+            exercisesList.listOfExercises = exercisesList.loadExercises();
+            loadCategoryExercises();
         }
     }
 
-
-    @Override
-
-    public void initialize(URL location, ResourceBundle resources) {
-        exercisesList.listOfExercises = exercisesList.loadExercises();
-        loadCategoryExercises();
-    }
-}

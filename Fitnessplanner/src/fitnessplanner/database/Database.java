@@ -1,4 +1,4 @@
-package fitnessplanner.database;
+package database;
 
 import java.sql.*;
 import java.util.Enumeration;

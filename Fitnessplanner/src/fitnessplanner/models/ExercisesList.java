@@ -1,6 +1,6 @@
-package fitnessplanner.models;
+package models;
 
-import fitnessplanner.database.Database;
+import database.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

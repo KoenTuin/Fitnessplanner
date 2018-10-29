@@ -1,4 +1,4 @@
-package fitnessplanner.models;
+package models;
 
 import javafx.scene.control.TextArea;
 

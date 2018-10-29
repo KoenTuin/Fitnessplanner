@@ -1,4 +1,6 @@
-package fitnessplanner.models;
+
+package models;
+
 
 public class Exercises {
     private String exercisesName;
