@@ -1,3 +1,9 @@
+/*
+Author: Koen van der Tuin
+
+Purpose: The purpose of the PersonalExercisesList class is to create a list of Exercises which the user wants
+to be in their own scheme.
+ */
 package models;
 
 import java.util.ArrayList;
@@ -17,7 +23,7 @@ public class PersonalExercisesList {
 
         return personalExercisesList;
     }
-    
+
     public List<Exercises> loadExercises(Exercises e) {
 
         Exercises exercise = e;

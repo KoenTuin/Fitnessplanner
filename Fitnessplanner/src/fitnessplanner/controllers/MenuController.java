@@ -1,3 +1,10 @@
+/*
+Author: Koen van der Tuin
+Author: Youri Pellicaan
+
+Purpose: The purpose of the MenuController is to make it possible for the user to interact with the data by using
+the Menu.fxml file.
+ */
 package controllers;
 
 import models.Exercises;
