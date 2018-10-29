@@ -31,18 +31,9 @@ public class exerciseMapper {
     public void getExerciseMethode() {
 
 
-
         try {
             ResultSet resultset = db.executeResultSetQuery("SELECT name FROM workout WHERE category = 'Buik'");
             name = resultset.getString("name");
-            System.out.println("Name: " + name);
-//            id = resultset.getInt("workout_id");
-//            description = resultset.getString("description");
-            // exerciseList = new ArrayList<>();
-//            while(resultset.next()) {
-//                Exercises ex = new Exercises(name, 0, null);
-//                exerciseList.add(ex);
-//            }
         } catch (SQLException e) {
             System.out.println(e);
         }

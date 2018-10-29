@@ -26,6 +26,9 @@
          <top>
             <Label text="Fitness planner" BorderPane.alignment="CENTER" />
          </top>
+         <bottom>
+            <Label fx:id="statusLabel" prefHeight="17.0" prefWidth="655.0" text="" BorderPane.alignment="CENTER" />
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
