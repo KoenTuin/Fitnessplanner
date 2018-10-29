@@ -57,7 +57,7 @@
                    <children>
                        <HBox prefHeight="150.0" prefWidth="646.0">
                            <children>
-                               <TextArea fx:id="discription" editable="false" text="Hier komt de informatie over oefeningen." />
+                               <TextArea fx:id="discription" editable="false" text="" />
                                <ImageView fx:id="workoutImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                        </HBox>
@@ -76,6 +76,9 @@
            <right>
 
         </right>
+         <bottom>
+            <Label fx:id="statusLabel" prefHeight="17.0" prefWidth="874.0" text="" BorderPane.alignment="CENTER" />
+         </bottom>
        </BorderPane>
    </children>
 </AnchorPane>

@@ -66,6 +66,8 @@ public class MenuController implements Initializable {
     private BorderPane menuScreen;
     @FXML
     private AnchorPane menuScreenSwitch;
+    @FXML
+    private Label statusLabel;
     private ExercisesList exercisesList = new ExercisesList();
     PersonalExercisesList personalListOfExercises = PersonalExercisesList.getPersonalExerciselists();
 
@@ -77,12 +79,14 @@ public class MenuController implements Initializable {
             if (e.getDescription().replaceAll("\\s+", "").equals(textDescription)) {
                 if (personalListOfExercises.PersonalListOfExercises == null) {
                     personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
+                    statusLabel.setText(e.getExercisesName() + " has been added to your list of favorite exercises");
                 } else {
                     if (checkIfDouble(e, textDescription)) {
                         personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
-
+                        statusLabel.setText(e.getExercisesName() + " has been added to your list of favorite exercises");
+                    }else {
+                        statusLabel.setText(e.getExercisesName() + " already is in your list of favorite exercises");
                     }
-                    
                 }
 
 
