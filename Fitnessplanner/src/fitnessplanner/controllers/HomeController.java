@@ -1,4 +1,4 @@
-package fitnessplanner.controllers;
+package controllers;
 
 public class HomeController {
 }

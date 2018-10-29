@@ -1,8 +1,9 @@
-package fitnessplanner.controllers;
+package controllers;
 
-import fitnessplanner.models.Exercises;
-import fitnessplanner.database.Database;
-import fitnessplanner.models.ExercisesList;
+import models.Exercises;
+import database.Database;
+import models.ExercisesList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -53,20 +55,27 @@ public class MenuController implements Initializable {
     private ImageView workoutImage;
     @FXML
     private BorderPane menuScreen;
+    @FXML
+    private AnchorPane menuScreenSwitch;
     private ExercisesList exercisesList = new ExercisesList();
     Database db = Database.getDatabase();
 
     @FXML
-    public void showScheme()throws IOException {
-        System.out.println("Go to personal scheme");
-        //laad de nieuwe table in de bestaande anchorpane
-//        menuScreen.getChildren().setAll(FXMLLoader.load("../../../resources/views/personalScheme.fxml"));
+    public void addExerciseToPersonalList(){
 
-        Stage editPriceDialogStage = new Stage();
-        Parent editPriceDialogRoot = FXMLLoader.load(
-                getClass().getResource("../resources/views/personalScheme.fxml")
-        );
-        Scene editPriceDialog = new Scene(editPriceDialogRoot);
+    }
+
+    @FXML
+    public void showScheme(ActionEvent event)throws IOException {
+        //laad de nieuwe table in de bestaande anchorpane
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/personalScheme.fxml"));
+        //maakt de oude table leeg
+        menuScreenSwitch.getChildren().setAll();
+        //laad de nieuwe table in
+        menuScreenSwitch.getChildren().setAll(pane);
+        //geeft de nieuwe table de juiste groote
+        pane.prefWidthProperty().bind(menuScreenSwitch.widthProperty());
+        pane.prefHeightProperty().bind(menuScreenSwitch.heightProperty());
     }
 
 

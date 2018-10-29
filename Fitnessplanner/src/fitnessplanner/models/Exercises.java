@@ -1,4 +1,4 @@
-package fitnessplanner.models;
+package models;
 import java.sql.SQLException;
 
 public class Exercises {

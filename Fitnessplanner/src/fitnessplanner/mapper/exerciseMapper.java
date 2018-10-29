@@ -1,7 +1,7 @@
-package fitnessplanner.mapper;
+package mapper;
 
-import fitnessplanner.database.Database;
-import fitnessplanner.models.Exercises;
+import database.Database;
+import models.Exercises;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
