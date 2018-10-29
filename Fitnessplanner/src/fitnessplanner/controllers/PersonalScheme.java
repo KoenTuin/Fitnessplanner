@@ -58,7 +58,6 @@ public class PersonalScheme implements Initializable {
 
     }
 
-
     @FXML
     public void deleteExercise(ActionEvent event) throws IOException {
         ObservableList<Exercises> exerciseSelected;
@@ -75,7 +74,7 @@ public class PersonalScheme implements Initializable {
         personalScreen.getChildren().setAll(pane);
 
     }
-
+    
     @FXML
     public void showExercises(ActionEvent event) throws IOException {
         //laad de nieuwe table in de bestaande anchorpane
