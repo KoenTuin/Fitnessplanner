@@ -52,16 +52,19 @@ public class PersonalScheme implements Initializable {
         setTable.getChildren().addAll(schemeTableView);
     }
     
-
+    //Delete exercises
     @FXML
     public void deleteExercise(ActionEvent event){
-        ObservableList<Exercises> exerciseSelected, allExercises;
-        allExercises = schemeTableView.getItems();
+        ObservableList<Exercises> exerciseSelected;
+
         exerciseSelected = schemeTableView.getSelectionModel().getSelectedItems();
 
-        exerciseSelected.forEach(allExercises::remove);
+        exerciseSelected.forEach(personalExercises::remove);
+
+//        exerciseSelected.forEach(allExercises::remove);
 
     }
+
     @FXML
     public void showExercises(ActionEvent event) throws IOException{
             //laad de nieuwe table in de bestaande anchorpane
