@@ -54,10 +54,9 @@ public class MenuController implements Initializable {
     @FXML
     private BorderPane menuScreen;
     private ExercisesList exercisesList = new ExercisesList();
-    Database db = Database.getDatabase();
 
     @FXML
-    public void showScheme()throws IOException {
+    public void showScheme() throws IOException {
         System.out.println("Go to personal scheme");
         //laad de nieuwe table in de bestaande anchorpane
 //        menuScreen.getChildren().setAll(FXMLLoader.load("../../../resources/views/personalScheme.fxml"));
@@ -85,21 +84,17 @@ public class MenuController implements Initializable {
     }
 
 
-
     @FXML
     public void showDescription(String naam) {
         List<Exercises> listOfExercises = exercisesList.listOfExercises;
         for (Exercises e : listOfExercises) {
-            try {
-                if (e.getExercisesName().equals(naam)) {
-                    discription.setText("");
-                    discription.appendText(e.getDescription() + "\n");
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            if (e.getExercisesName().equals(naam)) {
+                discription.setText("");
+                discription.appendText(e.getDescription() + "\n");
             }
         }
     }
+
 
     public void loadCategoryExercises() {
 
@@ -146,8 +141,8 @@ public class MenuController implements Initializable {
     }
 
 
-
     @Override
+
     public void initialize(URL location, ResourceBundle resources) {
         exercisesList.listOfExercises = exercisesList.loadExercises();
         loadCategoryExercises();

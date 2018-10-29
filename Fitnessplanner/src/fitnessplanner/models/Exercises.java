@@ -1,5 +1,4 @@
 package fitnessplanner.models;
-import java.sql.SQLException;
 
 public class Exercises {
     private String exercisesName;
@@ -49,7 +48,7 @@ public class Exercises {
         this.image = image;
     }
 
-    public String getDescription() throws SQLException {
+    public String getDescription() {
         return description;
     }
 
@@ -64,6 +63,7 @@ public class Exercises {
                 ", exerciseId=" + exerciseId +
                 ", description='" + description + '\'' +
                 ", image='" + image + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 }

@@ -24,23 +24,16 @@ public class Database {
     public static Database database;
 
     //Singleton
-    public static Database getDatabase(){
-        if (database == null){
+    public static Database getDatabase() {
+        if (database == null) {
             database = new Database();
         }
         return database;
     }
+
     // constructors
-   private Database() {
+    private Database() {
         this(DB_DEFAULT_DATABASE, DB_DEFAULT_SERVER_URL, DB_DEFAULT_ACCOUNT, DB_DEFAULT_PASSWORD);
-    }
-
-    private Database(String dbName) {
-        this(dbName, DB_DEFAULT_SERVER_URL, DB_DEFAULT_ACCOUNT, DB_DEFAULT_PASSWORD);
-    }
-
-    private Database(String dbName, String account, String password) {
-        this(dbName, DB_DEFAULT_SERVER_URL, account, password);
     }
 
     private Database(String dbName, String serverURL, String account, String password) {
@@ -84,10 +77,9 @@ public class Database {
      * elects proper loading of the named driver for database connections.
      * This is relevant if there are multiple drivers installed that match the JDBC type
      * @param driverName    the name of the driver to be activated.
-     * @return              indicates whether a suitable driver is available
+     * @return indicates whether a suitable driver is available
      */
-    private Boolean selectDriver(String driverName)
-    {
+    private Boolean selectDriver(String driverName) {
         try {
             Class.forName(driverName);
             // Put all non-prefered drivers to the end, such that driver selection hits the first
@@ -107,30 +99,11 @@ public class Database {
     }
 
     /***
-     * Executes a DDL, DML or DCL query that does not yield a result set
-     * @param sql   the full sql text of the query.
-     * @return      the number of rows that have been impacted, -1 on error
-     */
-    public int executeUpdateQuery(String sql) {
-        try {
-            Statement s = this.connection.createStatement();
-            log(sql);
-            int n = s.executeUpdate(sql);
-            s.close();
-            return (n);
-        } catch (SQLException ex) {
-            // handle exception
-            error(ex);
-            return -1;
-        }
-    }
-
-    /***
      * Executes an SQL query that yields a ResultSet with the outcome of the
      * query. This outcome may be a single row with a single column in case of
      * a scalar outcome.
      * @param sql   the full sql text of the query.
-     * @return      a ResultSet object that can iterate along all rows
+     * @return a ResultSet object that can iterate along all rows
      * @throws SQLException
      */
     public ResultSet executeResultSetQuery(String sql) throws SQLException {
@@ -139,75 +112,6 @@ public class Database {
         ResultSet rs = s.executeQuery(sql);
         // cannot close the statement, because that also closes the resultset
         return rs;
-    }
-
-    public int executeUpdateQueryReturnID(String sql) {
-        try {
-            Statement s = this.connection.createStatement();
-            log(sql);
-            s.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet n = s.getGeneratedKeys();
-
-            if (n.next()){
-                int id = n.getInt(1);
-                s.close();
-                return (id);
-            }else{
-                return -1;
-            }
-
-
-        } catch (SQLException ex) {
-            // handle exception
-            error(ex);
-            return -1;
-        }
-    }
-
-    /***
-     * Executes query that is expected to return a single String value
-     * @param sql   the full sql text of the query.
-     * @return      the string result, null if no result or error
-     */
-    public String executeStringQuery(String sql) {
-        String result = null;
-        try {
-            Statement s = this.connection.createStatement();
-            log(sql);
-            ResultSet rs = s.executeQuery(sql);
-            if (rs.next()) {
-                result = rs.getString(1);
-            }
-            // close both statement and resultset
-            s.close();
-        } catch (SQLException ex) {
-            error(ex);
-        }
-
-        return result;
-    }
-
-    /***
-     * Executes query that is expected to return a list of String values
-     * @param sql   the full sql text of the query.
-     * @return      the string result, null if no result or error
-     */
-    public String executeStringListQuery(String sql) {
-        String result = null;
-        try {
-            Statement s = this.connection.createStatement();
-            log(sql);
-            ResultSet rs = s.executeQuery(sql);
-            if (rs.next()) {
-                result = rs.getString(1);
-            }
-            // close both statement and resultset
-            s.close();
-        } catch (SQLException ex) {
-            error(ex);
-        }
-
-        return result;
     }
 
     /***
@@ -240,76 +144,7 @@ public class Database {
         this.close();
     }
 
-    /***
-     * builds a fitnessplanner database with fitnessplanner content
-     * @param dbName    name of the fitnessplanner database.
-     */
-    public static void createTestDatabase(String dbName) {
-
-        System.out.println("Creating the " + dbName + " database...");
-
-        // use the sys schema for creating another db
-        Database sysJDBC = new Database("sys");
-        sysJDBC.executeUpdateQuery("CREATE DATABASE IF NOT EXISTS " + dbName);
-        sysJDBC.close();
-
-        // create or truncate Airport table in the Airline database
-        System.out.println("Creating the Airport table...");
-        Database database = new Database(dbName);
-        database.executeUpdateQuery("CREATE TABLE IF NOT EXISTS Airport ("
-                + " IATACode VARCHAR(3) NOT NULL PRIMARY KEY,"
-                + " Name VARCHAR(45),"
-                + " TimeZone INT(3) )");
-
-        // truncate Airport, in case some data was already there
-        database.executeUpdateQuery("TRUNCATE TABLE Airport");
-
-        // Populate the Airport table in the Airline database
-        System.out.println("Populating with Airport information...");
-        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
-                + "'AMS', 'Schiphol Amsterdam', 1 )");
-        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
-                + "'LHR', 'London Heathrow', 0 )");
-        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
-                + "'BRU', 'Brussels Airport', 1 )");
-        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
-                + "'ESB', 'Ankara Esenboğa Airport', 2 )");
-        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
-                + "'SUF', 'Sant\\'Eufemia Lamezia International Airport', 1 )");
-        database.executeUpdateQuery("INSERT INTO Airport VALUES ("
-                + "'HKG', 'Hong Kong International', 8 )");
-
-        // echo all airports in timezone 1
-        System.out.println("Known Airports in time zone 1:");
-        try {
-            ResultSet rs = database.executeResultSetQuery(
-                    "SELECT IATACode, Name FROM AirPort WHERE TimeZone=1");
-            while (rs.next()) {
-                // echo the info of the next airport found
-                System.out.println(
-                        rs.getString("IATACode")
-                                + " " + rs.getString("Name"));
-            }
-            // close and release the resources
-            rs.close();
-
-        } catch (SQLException ex) {
-            database.error(ex);
-        }
-
-        // close the connection with the database
-        database.close();
-    }
-
     public boolean isVerbose() {
         return verbose;
-    }
-
-    public void setVerbose(boolean verbose) {
-        this.verbose = verbose;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
     }
 }
