@@ -68,30 +68,38 @@ public class MenuController implements Initializable {
         String textDescription = discription.getText().replaceAll("\\s+", "");
         for (Exercises e : exercisesList.listOfExercises) {
             if (e.getDescription().replaceAll("\\s+", "").equals(textDescription)) {
-                if(personalListOfExercises.PersonalListOfExercises == null) {
+                if (personalListOfExercises.PersonalListOfExercises == null) {
                     System.out.println("New list: first value");
                     personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
-                }else {
-                    System.out.println("New list: value added to list");
-                    checkIfDouble(e, textDescription);
-                }
+                } else {
+                    if (checkIfDouble(e, textDescription)) {
+                        personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
+                        System.out.println("New list: value added to list");
+                        for (Exercises f : personalListOfExercises.PersonalListOfExercises) {
+                            System.out.println(f);
+                        }
+                    } else {
+                        System.out.println("value was duplicate");
+                    }
 
                 }
+                
+
             }
         }
+    }
 
-    public void checkIfDouble(Exercises ex, String description){
-        for (Exercises e: personalListOfExercises.PersonalListOfExercises) {
-            if(description.equals(e.getDescription().replaceAll("\\s+", ""))){
-                System.out.println("Duplicate value deleted \n" + personalListOfExercises.PersonalListOfExercises);
-                break;
-            }else{
-                personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(ex);
-                break;
+    public boolean checkIfDouble(Exercises ex, String description) {
+        boolean waarde = true;
+        for (Exercises e : personalListOfExercises.PersonalListOfExercises) {
+            if (description.equals(e.getDescription().replaceAll("\\s+", ""))) {
+                waarde = false;
+            } else {
+                waarde = true;
             }
 
         }
-
+        return waarde;
     }
 
 
