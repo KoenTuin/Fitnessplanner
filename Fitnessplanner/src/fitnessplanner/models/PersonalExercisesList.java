@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonalExercisesList {
-    
+
+    public List<Exercises> PersonalListOfExercises;
+    private List<Exercises> exercises = new ArrayList<>();
+
     public static PersonalExercisesList personalExercisesList;
 
     public static PersonalExercisesList getPersonalExerciselists() {
@@ -14,11 +17,7 @@ public class PersonalExercisesList {
 
         return personalExercisesList;
     }
-
-    public List<Exercises> PersonalListOfExercises;
-
-    private List<Exercises> exercises = new ArrayList<>();
-
+    
     public List<Exercises> loadExercises(Exercises e) {
 
         Exercises exercise = e;
