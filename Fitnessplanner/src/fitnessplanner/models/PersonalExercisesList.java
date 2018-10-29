@@ -3,7 +3,17 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonalExercisesList{
+public class PersonalExercisesList {
+    
+    public static PersonalExercisesList personalExercisesList;
+
+    public static PersonalExercisesList getPersonalExerciselists() {
+        if (personalExercisesList == null) {
+            personalExercisesList = new PersonalExercisesList();
+        }
+
+        return personalExercisesList;
+    }
 
     public List<Exercises> PersonalListOfExercises;
 
@@ -11,16 +21,8 @@ public class PersonalExercisesList{
 
     public List<Exercises> loadExercises(Exercises e) {
 
-
-//        if(PersonalListOfExercises == null){
-//
-//            Exercises exercise = e;
-//            exercises.add(exercise);
-//        }
-
         Exercises exercise = e;
         exercises.add(exercise);
-
 
         return exercises;
     }
