@@ -76,22 +76,15 @@ public class MenuController implements Initializable {
         for (Exercises e : exercisesList.listOfExercises) {
             if (e.getDescription().replaceAll("\\s+", "").equals(textDescription)) {
                 if (personalListOfExercises.PersonalListOfExercises == null) {
-                    System.out.println("New list: first value");
                     personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
                 } else {
                     if (checkIfDouble(e, textDescription)) {
                         personalListOfExercises.PersonalListOfExercises = personalListOfExercises.loadExercises(e);
-                        System.out.println("New list: value added to list");
 
-                        for (Exercises f : personalListOfExercises.PersonalListOfExercises) {
-                            System.out.println(f);
-                        }
-                    } else {
-                        System.out.println("value was duplicate");
                     }
-
+                    
                 }
-                
+
 
             }
         }

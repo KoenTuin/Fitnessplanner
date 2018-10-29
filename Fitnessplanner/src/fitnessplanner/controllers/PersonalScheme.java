@@ -53,32 +53,9 @@ public class PersonalScheme implements Initializable {
         schemeTableView = new TableView<>();
         schemeTableView.setItems(personalExercises);
         schemeTableView.getColumns().addAll(nameColumn, descriptionColumn);
-        System.out.println("Set the table");
 
         setTable.getChildren().addAll(schemeTableView);
-//        while (resultSet.next()) {
-//            Vhousenumber = resultSet.getString("Vhousenumber");
-//            Vcity = resultSet.getString("Vcity");
-//            Vzipcode = resultSet.getString("Vzipcode");
-//            Hotelname = resultSet.getString("Hotelname");
-
-            //if currentdate -aantaldagen <= to database date than show
-//            if (date.compareTo(datadb) <= 0 && returnBagage == isGevonden) {
-//                bagagetabel.add(new bagageTabel(BagageID, Date, Time, State,
-//                        Labelnumber, Type, Brand, Color1, Color2, Characteristics,
-//                        IsReturned, Airport, Location, Initial, Insertion, Surname,
-//                        Street, Housenumber, Zipcode, City, Email, Phone1, Phone2,
-//                        Flightnumber, From, To, Vstreet, Vhousenumber, Vcity, Vzipcode,
-//                        Hotelname));
-
-//                for (int i = 0; i < table.getColumns().size(); i++) {
-//                    TableColumn column = (TableColumn) table.getColumns().get(i);
-//                    column.setCellValueFactory(new PropertyValueFactory(column.getId()));
-//                }
-//            }
-//        }
 //
-//        table.setItems(bagagetabel);
     }
     
 
