@@ -1,4 +1,9 @@
+/*
+Author: Koen van der Tuin
 
+Purpose: The purpose of the Exercices class is to create an object Exercises that can be used throughout the application
+to easily keep track of the data that we want to use.
+ */
 package models;
 
 

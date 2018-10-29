@@ -1,3 +1,9 @@
+/*
+Author: Koen van der Tuin
+
+Purpose: The purpose of the ExercisesList is to create a list which stores all of the exercises from the database
+by using the Exercises object.
+ */
 package models;
 
 import database.Database;

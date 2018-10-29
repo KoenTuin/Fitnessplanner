@@ -1,3 +1,10 @@
+/*
+Author: Koen van der Tuin
+Author: Youri Pellicaan
+
+Purpose: The purpose of the Database class is to create a connection with our used database and to also create
+an instance of that database so it can be used throughout the application where needed.
+ */
 package database;
 
 import java.sql.*;
