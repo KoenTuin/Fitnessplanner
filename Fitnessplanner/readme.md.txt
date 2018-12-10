@@ -1,3 +1,5 @@
 Read me JUnit tests 
 
-//todo add information
+Studenten: Koen van der Tuin en Youri Pellicaan
+Studenten nummers: 500771615 en 500771157
+klas: IS202
